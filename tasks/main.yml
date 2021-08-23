@@ -1,0 +1,34 @@
+---
+- name: "Install postgresql-client"
+  package:
+    name: postgresql-client
+    state: present
+
+- name: "Copy configuration"
+  copy:
+    src: pgbackup.sh
+    dest: /usr/local/bin/pgbackup.sh
+    mode: '0755'
+
+- name: "Copy configuration"
+  template:
+    src: pgbackups.conf.j2
+    dest: /etc/pgbackups.conf
+    mode: '0644'
+
+- name: "Install crontab to run backup every 4 hour"
+  cron:
+    name: "run backup"
+    minute: "0"
+    hour: "*/4"
+    job: "/usr/local/bin/pgbackup.sh"
+
+#- name: "Create a backup_restore user"
+#  user:
+#    name: "pgsql_bkp"
+#    password: "{{ backup_user_pass | password_hash('sha512') }}"
+#    shell: /bin/bash
+#    update_password: on_create
+#    expires: -1
+#    state: present
+#  ignore_errors: true

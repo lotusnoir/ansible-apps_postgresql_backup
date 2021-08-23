@@ -1,0 +1,3 @@
+{% for item in pgsql_backup %}
+PGHOST={{ item.host }} PGUSER={{ item.name }} PGPASSWORD={{ item.password }} PGDATABASE={{ item.db }} PGDUMP_OPTIONS={{ item.options | default ('') }}
+{% endfor %} 
