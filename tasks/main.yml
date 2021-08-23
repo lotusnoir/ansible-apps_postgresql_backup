@@ -16,6 +16,12 @@
     dest: /etc/pgbackups.conf
     mode: '0644'
 
+- name: "Install requirement"
+  package:
+    name: cron
+    state: present
+    install_recommends: no
+
 - name: "Install crontab to run backup every 4 hour"
   cron:
     name: "run backup"
