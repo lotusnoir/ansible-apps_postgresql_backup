@@ -1,6 +1,5 @@
 ---
 backup_user_pass: "strongpass"
 pgsql_backup:
-  - { host: 10.2.3.4, name: "confluence", password: "test",  db: "confluence" }
-  - { host: 10.2.16.24, name: "powerdns", password: "test2", db: "dns" }
-
+  - {host: 10.2.3.4, name: "confluence", password: "test", db: "confluence"}
+  - {host: 10.2.16.24, name: "powerdns", password: "test2", db: "dns"}

@@ -1,0 +1,4 @@
+---
+postgresql_backup_pkg:
+  - postgresql
+  - crontabs

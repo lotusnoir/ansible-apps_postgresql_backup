@@ -1,40 +1,22 @@
 ---
-- name: "Install postgresql-client"
-  package:
-    name: postgresql-client
-    state: present
+### Checks
+- name: Import check tasks
+  ansible.builtin.import_tasks: check.yml
 
-- name: "Copy configuration"
-  copy:
-    src: pgbackup.sh
-    dest: /usr/local/bin/pgbackup.sh
-    mode: '0755'
+### Import vars
+- name: add OS specific variables
+  ansible.builtin.include_vars: '{{ vars_file }}'
+  with_first_found:
+    - files:
+        - '{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+        - 'main.yml'
+      paths:
+        - 'vars'
+  loop_control:
+    loop_var: vars_file
 
-- name: "Copy configuration"
-  template:
-    src: pgbackups.conf.j2
-    dest: /etc/pgbackups.conf
-    mode: '0644'
-
-- name: "Install requirement"
-  package:
-    name: cron
-    state: present
-    install_recommends: no
-
-- name: "Install crontab to run backup every 4 hour"
-  cron:
-    name: "run backup"
-    minute: "0"
-    hour: "*/4"
-    job: "/usr/local/bin/pgbackup.sh"
-
-#- name: "Create a backup_restore user"
-#  user:
-#    name: "pgsql_bkp"
-#    password: "{{ backup_user_pass | password_hash('sha512') }}"
-#    shell: /bin/bash
-#    update_password: on_create
-#    expires: -1
-#    state: present
-#  ignore_errors: true
+### Install
+- name: Import install tasks
+  ansible.builtin.import_tasks: install.yml

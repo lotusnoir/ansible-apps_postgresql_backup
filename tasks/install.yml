@@ -1,0 +1,41 @@
+---
+- name: Configure the PostgreSQL RPM repository
+  ansible.builtin.dnf:
+    name: "https://download.postgresql.org/pub/repos/yum/reporpms/EL-{{ ansible_distribution_major_version }}-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
+    state: present
+    disable_gpg_check: true
+  when: ansible_os_family == 'RedHat'
+
+- name: "Install requierements"
+  ansible.builtin.package:
+    name: "{{ postgresql_backup_pkg }}"
+    state: present
+
+- name: "Copy configuration"
+  ansible.builtin.copy:
+    src: pgbackup.sh
+    dest: /usr/local/bin/pgbackup.sh
+    mode: '0755'
+
+- name: "Copy configuration"
+  ansible.builtin.template:
+    src: pgbackups.conf.j2
+    dest: /etc/pgbackups.conf
+    mode: '0644'
+
+- name: "Install crontab to run backup every 4 hour"
+  ansible.builtin.cron:
+    name: "run backup"
+    minute: "0"
+    hour: "*/4"
+    job: "/usr/local/bin/pgbackup.sh"
+
+#- name: "Create a backup_restore user"
+#  ansible.builtin.user:
+#    name: "pgsql_bkp"
+#    password: "{{ backup_user_pass | password_hash('sha512') }}"
+#    shell: /bin/bash
+#    update_password: on_create
+#    expires: -1
+#    state: present
+#  ignore_errors: true

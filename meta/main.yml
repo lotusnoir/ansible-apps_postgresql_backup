@@ -1,24 +1,29 @@
 ---
 galaxy_info:
-  author: "Philippe leal"
-  description: "Install script to backup postgresql databases"
+  author: lotusnoir
   role_name: apps_postgresql_backup
-  license: "license: Apache License, Version 2.0"
+  description: "Install script to backup sql databases."
+  license: "Apache License, Version 2.0"
   min_ansible_version: 2.8
 
   platforms:
     - name: "Ubuntu"
       versions:
-        - "xenial"
+        - "focal"
         - "bionic"
+        - "jammy"
     - name: "Debian"
       versions:
         - "buster"
-        - "stretch"
+        - "bullseye"
+    - name: "OracleLinux"
+      versions:
+        - "8"
 
   galaxy_tags:
     - postgresql
+    - mysql
+    - bdd
     - backup
-    - databases
 
 dependencies: []
