@@ -1,15 +1,23 @@
 ---
-- name: Configure the PostgreSQL RPM repository
+- name: "Configure the PostgreSQL RPM repository"
   ansible.builtin.dnf:
     name: "https://download.postgresql.org/pub/repos/yum/reporpms/EL-{{ ansible_distribution_major_version }}-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
     state: present
     disable_gpg_check: true
+  register: pkg_result
+  retries: 12
+  delay: 10
+  until: pkg_result is success
   when: ansible_os_family == 'RedHat'
 
 - name: "Install requierements"
   ansible.builtin.package:
     name: "{{ postgresql_backup_pkg }}"
     state: present
+  register: pkg_result
+  retries: 12
+  delay: 10
+  until: pkg_result is success
 
 - name: "Copy configuration"
   ansible.builtin.copy:

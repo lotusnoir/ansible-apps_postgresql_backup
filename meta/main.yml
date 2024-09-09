@@ -9,17 +9,14 @@ galaxy_info:
   platforms:
     - name: "Ubuntu"
       versions:
-        - "focal"
         - "bionic"
+        - "focal"
         - "jammy"
     - name: "Debian"
       versions:
         - "buster"
         - "bullseye"
         - "bookworm"
-    - name: "OracleLinux"
-      versions:
-        - "8"
 
   galaxy_tags:
     - postgresql

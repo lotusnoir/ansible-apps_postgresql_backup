@@ -30,4 +30,3 @@ fi
 
 #rm ${BACKUPBASEDIR}/last_postresql_backup
 ln -s ${BACKUPDIR} ${BACKUPBASEDIR}/last_postresql_backup
-
