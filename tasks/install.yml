@@ -4,20 +4,20 @@
     name: "https://download.postgresql.org/pub/repos/yum/reporpms/EL-{{ ansible_distribution_major_version }}-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
     state: present
     disable_gpg_check: true
-  register: pkg_result
+  register: __pkg_result
   retries: 12
   delay: 10
-  until: pkg_result is success
+  until: __pkg_result is success
   when: ansible_os_family == 'RedHat'
 
 - name: "Install requierements"
   ansible.builtin.package:
     name: "{{ postgresql_backup_pkg }}"
     state: present
-  register: pkg_result
+  register: __pkg_result
   retries: 12
   delay: 10
-  until: pkg_result is success
+  until: __pkg_result is success
 
 - name: "Copy configuration"
   ansible.builtin.copy:
@@ -38,12 +38,12 @@
     hour: "*/4"
     job: "/usr/local/bin/pgbackup.sh"
 
-#- name: "Create a backup_restore user"
-#  ansible.builtin.user:
-#    name: "pgsql_bkp"
-#    password: "{{ backup_user_pass | password_hash('sha512') }}"
-#    shell: /bin/bash
-#    update_password: on_create
-#    expires: -1
-#    state: present
-#  ignore_errors: true
+# - name: "Create a backup_restore user"
+#   ansible.builtin.user:
+#     name: "pgsql_bkp"
+#     password: "{{ backup_user_pass | password_hash('sha512') }}"
+#     shell: /bin/bash
+#     update_password: on_create
+#     expires: -1
+#     state: present
+#   ignore_errors: true
