@@ -3,8 +3,7 @@
 [![Galaxy Role](https://img.shields.io/badge/galaxy-apps_postgresql_backup-purple?style=flat)](https://galaxy.ansible.com/lotusnoir/apps_postgresql_backup)
 [![Version](https://img.shields.io/github/release/lotusnoir/ansible-apps_postgresql_backup.svg)](https://github.com/lotusnoir/ansible-apps_postgresql_backup/releases/latest)
 [![GitHub repo size](https://img.shields.io/github/repo-size/lotusnoir/ansible-apps_postgresql_backup?color=orange&style=flat)](https://galaxy.ansible.com/lotusnoir/apps_postgresql_backup)
-[![downloads](https://img.shields.io/ansible/role/d/56095)](https://galaxy.ansible.com/lotusnoir/apps_postgresql_backup)
-[![Ansible Quality Score](https://img.shields.io/ansible/quality/56095)](https://galaxy.ansible.com/lotusnoir/apps_postgresql_backup)
+[![downloads](https://img.shields.io/ansible/role/d/lotusnoir/apps_postgresql_backup)](https://galaxy.ansible.com/lotusnoir/apps_postgresql_backup)
 [![License](https://img.shields.io/badge/license-Apache--2.0-brightgreen?style=flat)](https://opensource.org/licenses/Apache-2.0)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
